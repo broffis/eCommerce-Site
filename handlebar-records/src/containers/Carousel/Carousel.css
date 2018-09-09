@@ -1,0 +1,8 @@
+.Carousel {
+    height: 100px;
+    /* width: 100%; */
+}
+
+.Carousel div {
+    background-color: green;
+}

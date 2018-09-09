@@ -1,0 +1,12 @@
+.NavItem {
+    margin: 10px 0;
+    box-sizing: border-box;
+    display: block;
+    width: 100%;
+    margin: 5% 0;
+}
+
+.NavItem a {
+    color: #472C25;
+
+}

@@ -1,0 +1,10 @@
+.About {
+    font-family: 'Montserrat', sans-serif;
+}
+
+.BodyText p {
+    font-size: 0.75em;
+    text-align: justify;
+    line-height: 1em;
+    font-family: 'Crimson Text', serif;
+}
