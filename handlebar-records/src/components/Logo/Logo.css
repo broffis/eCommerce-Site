@@ -1,5 +1,8 @@
 .Logo {
   background-color: #EB712F;
+  /* height: 30px; */
+  width: 100%;
+  padding: 5px;
 }
 
 .Header_ln1 {
@@ -9,4 +12,8 @@
   .Header_ln2 {
     font-size: 2.5em;
     font-stretch: wider;
+  }
+
+  .Logo img {
+    height: 50px;
   }

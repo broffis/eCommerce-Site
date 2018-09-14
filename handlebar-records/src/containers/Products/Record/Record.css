@@ -1,0 +1,10 @@
+.Record {
+    background-color: hotpink;
+    padding: 2%;
+    box-sizing: border-box;
+    box-shadow: 0 2px 3px #ccc;
+}
+
+.Record li p {
+    font-family: 'Montserrat', sans-serif;
+}

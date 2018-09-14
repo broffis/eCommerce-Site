@@ -1,6 +1,7 @@
 import React from 'react';
 
 import NavList from '../NavList/NavList';
+// import Logo from '../../Logo/Logo';
 import Logo from '../../Logo/Logo';
 import classes from './Toolbar.css'
 

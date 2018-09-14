@@ -3,18 +3,20 @@ import { Route, Switch } from 'react-router-dom';
 
 import classes from  './App.css';
 import Layout from './hoc/Layout/Layout';
+import Products from './containers/Products/Products';
+import ContactData from './containers/ContactData/ContactData';
 
 class App extends Component {
   render() {
     return (
       <div className={classes.App}>
-        <header>
-          <div className={classes.Appheader}>
-            <h1 className={classes.Header_ln1}>Handlebar</h1>
-            <h1 className={classes.Header_ln2}>Records</h1>
-          </div>
-        </header>
-        <Layout />
+        <Layout>
+          <Switch>
+            <Route path="/products" component={Products}/>
+            <Route path="/contact" component={ContactData}/>
+            <Route path="/" component={App}/>
+          </Switch>
+        </Layout>
       </div>
     );
   }

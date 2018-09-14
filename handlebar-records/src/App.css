@@ -15,12 +15,12 @@
   padding: 5%; 
   color: white;
   font-family: 'Montserrat', sans-serif;
+  box-sizing: border-box;
   /* align-items: center; */
 }
 
-
-.Appheader h1 {
-  margin: -10px;
+.Appheader img {
+  width: 30%;
 }
 
 .App-title {

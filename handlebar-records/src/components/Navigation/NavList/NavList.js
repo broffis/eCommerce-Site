@@ -1,7 +1,7 @@
 import React from 'react';
 
 import classes from './NavList.css';
-import NavItem from './NavItem/NavItem';
+// import NavItem from './NavItem/NavItem';
 
 
 const navigationItems = () => (

@@ -11,12 +11,11 @@ class CenterMode extends Component {
             infinite: true,
             centerPadding: "60px",
             slidesToShow: 3,
-            speed: 500,
-            height: "100px"
+            speed: 500
         };
         return (
             <div className={classes.Carousel}>
-                <h2>Center Mode</h2>
+                {/* <h2>Center Mode</h2> */}
                 <Slider {...settings}>
                     <div>
                         <h3>1</h3>

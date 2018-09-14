@@ -1,16 +1,22 @@
 .Toolbar {
-    height: 56px;
+    /* height: 56px; */
+    height: 15%;
     width: 100%;
     position: fixed;
     top: 0;
     left: 0;
     background-color: #EB712F;
     display: flex;
-    justify-content: center;
-    padding: 0 20px;
+    flex-direction: column;
+    justify-content: space-between;
+    /* padding: 10px 0 0 0; */
     box-sizing: border-box;
 }
 
 .Logo {
-    height: 80%;
+    /* height: 80%; */
+    box-sizing: border-box;
+    /* justify-content: center; */
+    padding: 5px;
+    width: 100%;
 }
