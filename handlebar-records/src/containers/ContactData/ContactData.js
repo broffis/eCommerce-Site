@@ -56,7 +56,7 @@ class ContactData extends Component {
                 },
                 value: ''
             },
-            loading: false
+            // loading: false
         }
     }
     render() {

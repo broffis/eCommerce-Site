@@ -1,10 +1,28 @@
 .Record {
-    background-color: hotpink;
-    padding: 2%;
+    /* background-color: hotpink; */
+    /* padding: 2%; */
     box-sizing: border-box;
     box-shadow: 0 2px 3px #ccc;
+    display: flex;
+    flex-direction: column;
+    /* position: absolute; */
 }
 
-.Record li p {
+.Record figcaption {
     font-family: 'Montserrat', sans-serif;
+    background-color: white;
+    opacity: 0.8;
+    /* display: none; */
 }
+
+.Record figure {
+    margin: 0;
+    padding: 0;
+}
+
+.Record img {
+    /* width: 100px; */
+    width: 100%;
+    z-index: -1;
+}
+

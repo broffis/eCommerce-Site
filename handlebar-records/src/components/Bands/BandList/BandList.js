@@ -12,8 +12,11 @@ const bandList = (props) => {
     //             filteredBands.push(arr[i].bandName);
     //         }
     //     }
-    //     return filteredBands
+    //     return console.log(filteredBands);
     // }
+    // removeDuplicateBands(props.bandList);
+
+    // console.log(filteredBands);
 
     // let uniqueBands = removeDuplicateBands(bands);
 

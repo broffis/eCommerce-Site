@@ -1,9 +1,14 @@
 .SubCarousel {
     display: flex;
     width: 100%;
-    padding: 5% auto;
+    padding: 5% 0% 5% 5%;
     box-sizing: border-box;
     align-content: center;
+    margin-top: 18%;
+    /* background-color: hotpink; */
+    /* background-image: 'finalimages/records-bkgrnd.jpg'; */
+    /* background-repeat: no-repeat; */
+    /* background-size: cover; */
 }
 
 .About {
@@ -12,6 +17,10 @@
     display: inline-block;
     box-sizing: border-box;
     font-family: 'Montserrat', sans-serif;
+    border: 2px solid #ccc;
+    box-shadow: 0 2px 3px #ccc;
+    background-color: white;
+    opacity: 0.75;
 }
 
 .BandList {
@@ -46,3 +55,8 @@
     width: 20%;
     font-family: 'Crimson Text', serif;
 }
+
+img {
+    width: auto;
+}
+

@@ -5,6 +5,7 @@ import classes from  './App.css';
 import Layout from './hoc/Layout/Layout';
 import Products from './containers/Products/Products';
 import ContactData from './containers/ContactData/ContactData';
+import Carousel from './containers/Carousel/Carousel';
 
 class App extends Component {
   render() {
@@ -12,9 +13,9 @@ class App extends Component {
       <div className={classes.App}>
         <Layout>
           <Switch>
-            <Route path="/products" component={Products}/>
+            <Route path="/shop" component={Products}/>
             <Route path="/contact" component={ContactData}/>
-            <Route path="/" component={App}/>
+            <Route path="/" component={Carousel}/>
           </Switch>
         </Layout>
       </div>

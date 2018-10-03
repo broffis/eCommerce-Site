@@ -1,5 +1,7 @@
 .About {
     font-family: 'Montserrat', sans-serif;
+    border: 1px solid #ccc;
+    background-color: hotpink;
 }
 
 .BodyText p {

@@ -1,6 +1,6 @@
 .Toolbar {
     /* height: 56px; */
-    height: 15%;
+    height: 10%;
     width: 100%;
     position: fixed;
     top: 0;
@@ -11,6 +11,8 @@
     justify-content: space-between;
     /* padding: 10px 0 0 0; */
     box-sizing: border-box;
+    z-index: 50;
+    box-shadow: 0 2px 3px #ccc;
 }
 
 .Logo {
@@ -19,4 +21,22 @@
     /* justify-content: center; */
     padding: 5px;
     width: 100%;
+}
+
+@media screen and (min-width: 480px) {
+    .Toolbar{
+        height: 10%;
+    }
+}
+
+@media screen and (min-width: 720px) {
+    .Toolbar {
+        height: 100px;
+    }
+}
+
+@media screen and (min-width: 960px) {
+    .Toolbar {
+        height: 120px;
+    }
 }

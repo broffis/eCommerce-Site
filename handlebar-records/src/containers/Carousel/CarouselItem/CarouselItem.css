@@ -1,0 +1,31 @@
+.CarouselItem {
+        /* background-color: green; */
+        height: 100%;
+        /* width: 75%; */
+        box-sizing: border-box;
+        /* border: 2px solid black; */
+        position: relative;
+        display: flex;
+        /* justify-content: center; */
+        width: 100%;
+        /* background-color: hotpink; */
+}
+
+.CarouselItem figure {
+        margin: 1px;
+        padding: 0;
+}
+
+.CarouselItem figcaption {
+        text-align: center;
+        padding: auto;
+        /* z-index: 1; */
+        display: none;
+}
+
+.CarouselItem img {
+        /* width: auto; */
+        width: 100%;
+        height: 100%;
+        /* display: none; */
+}

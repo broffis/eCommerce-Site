@@ -17,3 +17,18 @@
   .Logo img {
     height: 50px;
   }
+
+  @media screen and (min-width: 720px) {
+    .Logo img {
+      height: 75px;
+      width: auto;
+    }
+  }
+
+  
+  @media screen and (min-width: 960px) {
+    .Logo img {
+      height: 100px;
+      width: auto;
+    }
+  }

@@ -2,39 +2,37 @@ import React, { Component } from 'react';
 import Slider from 'react-slick';
 
 import classes from './Carousel.css';
+import CarouselItem from './CarouselItem/CarouselItem';
 
 class CenterMode extends Component {
     render(){
+        const albumList = this.props.albumList;
         const settings = {
             className: "center",
-            centerMode: true,
+            // centerMode: true,
+            dots: true,
             infinite: true,
-            centerPadding: "60px",
+            // centerPadding: "60px",
             slidesToShow: 3,
-            speed: 500
+            slidesToScroll: 1,
+            speed: 500,
+            // autoplay: true,
+            // lazyLoad: true,
+            pauseOnHover: true,
+            // height: "300px"
         };
         return (
             <div className={classes.Carousel}>
                 {/* <h2>Center Mode</h2> */}
                 <Slider {...settings}>
-                    <div>
-                        <h3>1</h3>
-                    </div>
-                    <div>
-                        <h3>2</h3>
-                    </div>
-                    <div>
-                        <h3>3</h3>
-                    </div>
-                    <div>
-                        <h3>4</h3>
-                    </div>
-                    <div>
-                        <h3>5</h3>
-                    </div>
-                    <div>
-                        <h3>6</h3>
-                    </div>
+                    {albumList.map(album => (
+                        <CarouselItem
+                            key={album.id}
+                            cover={album.cover}
+                            band={album.bandName}
+                            albumName={album.albumName}
+                            />
+                    ))}
                 </Slider>
             </div>
         );
