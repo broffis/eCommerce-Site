@@ -2,37 +2,43 @@ var mongoose = require('mongoose');
 
 
 var Product = mongoose.model('Product', {
-    bandName: {
+    Artist: {
         type: String,
         required: true,
         minlength: 1        
     },
-    albumTitle: {
+    Album: {
         type: String,
         required: true,
         minlength: 1
     },
-    cover: {
+    Cover_Art: {
         type: String,
         required: true,
         minlength: 1
     },
-    releaseYear:  {
+    Release_Year:  {
         type: Number,
         required: true,
         minlength: 4,
         maxlength: 4
     },
-    recordLabel: {
+    Record_Label: {
         type: String,
         required: true,
         minlength: 1,
         trim: true
     },
-    price: {
+    Price: {
         type: Number,
         required: true,
         minlength: 4,
+        trim: true
+    },
+    Spotify_URI: {
+        type: String,
+        required: true,
+        minlength: 1,
         trim: true
     }
 });

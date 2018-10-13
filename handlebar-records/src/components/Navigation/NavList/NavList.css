@@ -10,8 +10,38 @@
     justify-content: center;
     width: 100%;
     background-color: #999;
+    /* align-content: center; */
+    padding-bottom: 2.5%;
+}
+
+.NavItems ul {
+    
 }
 
 .NavItems li {
-    /* padding: 0 5%; */
+    /* padding: 0 0 5% 0; */
+    margin-bottom: 2.5px;
+}
+
+.NavItems a {
+    text-decoration: none;
+    color: #472C25;
+    /* margin-bottom: 2px; */
+}
+
+@media screen and (min-width: 720px) {
+    .NavItems li {
+        font-size: 1.25em;    
+    }
+}
+
+
+@media screen and (min-width: 960px) {
+    .NavItems {
+        padding-bottom: 1.5%;
+    }
+    
+    .NavItems li {
+        font-size: 1.25em;    
+    }
 }

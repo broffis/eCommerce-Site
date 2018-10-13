@@ -3,12 +3,42 @@ const bodyParser = require('body-parser');
 const _ = require('lodash');
 const {ObjectID} = require('mongodb');
 
-var {mongoose} = require('./db/mongoose');
+// var {mongoose} = require('./db/mongoose');
 var {Form} = require('./models/form');
 var {Product} = require('./models/product');
 
+
+var mysql = require('mysql');
+var connection = mysql.createConnection({
+    host: 'localhost',
+    port: 8889,
+    user: 'root',
+    password: 'root',
+    database: 'Handlebar Records'
+});
+
+connection.connect((error) => {
+    if(error) {
+      return  console.log('Connection error');
+    }
+    
+    console.log('Connected to MySQL');
+});
+
+
 var app = express();
 
+app.use((req, res, next) => {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Headers', '*');
+    if(req.method == 'OPTIONS'){
+        res.header('Acces-Control-Allow-Methods', 'POST', 'PATCH', 'GET', 'DELETE');
+        return res.status(200).json({});
+    }
+    next();
+});
+
+app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 
 
@@ -32,12 +62,18 @@ app.post('/products', (req, res) => {
 });
 
 app.get('/products', (req, res) => {
-    Product.find().then((products) => {
-        res.send({products})
-    }, (e) => {
-        res.status(400).send(e);
-    });
+    // Product.find().then((products) => {
+    //     res.send({products})
+    // }, (e) => {
+    //     res.status(400).send(e);
+    // });
+    connection.query('SELECT * FROM products', function(error, results, fields) {
+        if(error) throw error;
+        // console.log(JSON.stringify(results, undefined, 2));
+       res.send(results);
+    })
 });
+
 /*  Endpoint: /products/:id */
 app.get('/products/:id', (req, res) => {
     var id = req.params.id;
@@ -120,7 +156,6 @@ app.get('/users', (req, res) => {
 });
 
 /*  Endpoint: /users:id */
-
 app.get('/users/:id', (req, res) => {
     var id = req.params.id;
 

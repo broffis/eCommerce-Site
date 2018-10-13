@@ -1,6 +1,6 @@
 import React from 'react';
 
-// import NavList from '../NavList/NavList';
+import NavList from '../NavList/NavList';
 // import Logo from '../../Logo/Logo';
 import Logo from '../../Logo/Logo';
 import classes from './Toolbar.css'
@@ -11,7 +11,7 @@ const toolbar = (props) => (
             <Logo />
         </div>
         <nav>
-            {/* <NavList/> */}
+            <NavList/>
         </nav>
     </header>
 )

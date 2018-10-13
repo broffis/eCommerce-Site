@@ -1,15 +1,59 @@
 .ContactData {
-    margin: 20px auto;
+    margin: 100px auto;
     width: 80%;
     text-align: center;
     box-shadow: 0 2px 3px #ccc;
     border: 1px solid #eee;
     padding: 10px;
     box-sizing: border-box;
+    /* height: 100vh; */
 }
+
+.ContactData button {
+    font-size: .75em;
+    border: 1px solid black;
+    border-radius: 5px;
+    box-shadow: 0 1px 1.5px #ccc;
+    background-color: white;
+    /* text-align: right; */
+}
+
+.ContactData button:hover {
+    background-color: green;
+    color: white;
+}
+
 
 @media (min-width: 600px) {
     .ContactData {
         width: 500px;
     }
 }
+
+
+@media screen and (min-width: 480px) {
+
+}
+
+@media screen and (min-width: 720px) {
+    .BodyText h3 {
+        font-size: 1.65em;
+    }
+    .BodyText p {
+       font-size: 1.15em;
+    }
+}
+
+
+
+@media screen and (min-width: 960px) {
+    .BodyText h3 {
+        font-size: 1.65em;
+    }
+    .BodyText p {
+       font-size: 1.15em;
+    }
+    .ContactData button {
+        font-size: 1em;
+    }
+  }

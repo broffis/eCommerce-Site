@@ -12,7 +12,7 @@ class ContactData extends Component {
                     type: 'text',
                     placeholder: 'Your Name'
                 },
-                value: ''
+                // value: ''
             },
             street: {
                 elementType: 'input',
@@ -20,7 +20,7 @@ class ContactData extends Component {
                     type: 'text',
                     placeholder: 'Street Address',
                 },
-                value: ''
+                // value: ''
             },
             zipCode: {
                 elementType: 'input',
@@ -28,7 +28,7 @@ class ContactData extends Component {
                     type: 'text',
                     placeholder: 'Zip Code'
                 },
-                value: ''
+                // value: ''
             },
             country: {
                 elementType: 'input',
@@ -36,7 +36,7 @@ class ContactData extends Component {
                     type: 'text',
                     placeholder: 'Country'
                 },
-                value: ''
+                // value: ''
             },
             email: {
                 elementType: 'input',
@@ -44,7 +44,7 @@ class ContactData extends Component {
                     type: 'email',
                     placeholder: 'Email Address'
                 },
-                value: ''
+                // value: ''
             },
             // deliveryMethod: {
             //     elementType: 'select',
@@ -83,6 +83,7 @@ class ContactData extends Component {
             <div className={classes.ContactData}>
                 <h4>Enter your Contact Data</h4>
                 {form}
+                <button type="button">Submit</button>
             </div>
         )
     }

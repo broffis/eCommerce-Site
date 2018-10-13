@@ -5,9 +5,12 @@
     width: 100%;
     margin: 1% 0;
     height: 10px;
+    /* align-self: center; */
+
 }
 
 .NavItem a {
     color: #472C25;
-    text-decoration: none;
 }
+
+
