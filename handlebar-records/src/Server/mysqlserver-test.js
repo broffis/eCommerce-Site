@@ -32,16 +32,28 @@ connection.connect((err)=> {
 // })
 
 
-var sqlInsert = "INSERT INTO users (Name, Address, ZipCode, Country, Email, Password) VALUES ?";
-// var values = ( "Name",
-//                 "Address",
-//                 "ZipCode",
-//                 "Country",
-//                 "Email",
-//                 "Password" );
-connection.query("INSERT INTO users (Name, Address, ZipCode, Country, Email, Password) VALUES ('Savannah', '456 South Street', 98765, 'US', 'anotherone@test.com', 'Testing')", function(error, results, fields) {
+var sqlInsert = "INSERT INTO users (Name, Address, ZipCode, Country, Email, Password) VALUES ";
+var values =  ['Name',
+                'Address',
+                'ZipCode',
+                'Country',
+                'Email',
+                'Password'];
+// connection.query("INSERT INTO users (Name, Address, ZipCode, Country, Email, Password) VALUES ('Savannah', '456 South Street', 98765, 'US', 'anotherone@test.com', 'Testing')", function(error, results, fields) {
+//     if(error) throw error;
+//     console.log(`Inserted values into sql`)
+// })
+
+connection.query(sqlInsert, [values], function(error, results, fields){
     if(error) throw error;
-    console.log(`Inserted values into sql`)
-})
+    console.log(`Inserted values into sql`);
+});
+
+
+let name = req.body.custName;
+let address = req.body.streetAddress;
+let zipCode = req.body.zipCode;
+let country = req.body.country;
+let custEmail = req.body.custEmail;
 
 connection.end();

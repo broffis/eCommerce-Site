@@ -31,11 +31,11 @@ var app = express();
 app.use((req, res, next) => {
     res.header('Access-Control-Allow-Origin', '*');
     res.header('Access-Control-Allow-Headers', '*');
-    if(req.method == 'OPTIONS'){
+    // if(req.method == 'OPTIONS'){
         res.header('Acces-Control-Allow-Methods', 'POST', 'PATCH', 'GET', 'DELETE');
-        return res.status(200).json({});
-    }
-    next();
+        // return res.status(200).json({});
+        next();
+    // }
 });
 
 app.use(bodyParser.urlencoded({extended: false}));
@@ -146,13 +146,13 @@ app.post('/users', (req, res) => {
     let Country = req.body.country;
     let Email = req.body.custEmail;
 
-    const values = [
-        "Name",
-        "Address",
-        "ZipCode",
-        "Country",
-        "Email"
-    ];
+    // const values = [
+    //     "Name",
+    //     "Address",
+    //     "ZipCode",
+    //     "Country",
+    //     "Email"
+    // ];
 
     // form.save().then((doc) => {
     //     res.send(doc);
@@ -160,8 +160,15 @@ app.post('/users', (req, res) => {
     //     res.send(e);
     // });
 
-    var sqlInsert = "INSERT INTO users (Name, Street, ZipCode, Country, Email) VALUES ?";
-    connection.query(sqlInsert, [values], function(err, result) {
+    // console.log(Name, Address, ZipCode, Country, Email);
+
+    var sqlInsert = "INSERT INTO users (Name, Address, ZipCode, Country, Email, Password) VALUES ";
+    
+    sqlInsert += `("${Name}", "${Address}", ${ZipCode}, "${Country}", "${Email}", "Password")`;
+    
+    // console.log(sqlInsert);
+
+    connection.query(sqlInsert, function(err, result) {
         if(err) throw err;
         console.log("Number of records inserted: " + result.affectedRows);
     })

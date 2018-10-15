@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import request from 'superagent';
 
 import classes from './ContactData.css';
 import Input from '../../components/Contact/Input/Input';
@@ -59,22 +60,27 @@ class ContactData extends Component {
         let country = document.getElementById('country').value;
         let custEmail = document.getElementById('email').value;
 
-        event.preventDefault();
-        const data = new FormData(event.target);
+        // event.preventDefault();
+        // const data = new FormData(event.target);
 
-        fetch(apiURL, {
-            method: 'POST',
-            body: JSON.stringify({
-                custName,
-                streetAddress,
-                zipCode,
-                country,
-                custEmail
-            })
-        });
+        // fetch(apiURL, {
+        //     method: 'POST',
+        //     body: data
+        // });
         // console.log(body);
 
         // console.log();
+
+        // console.log(custName, streetAddress, zipCode, country, custEmail);
+
+        request
+            .post("http://localhost:3000/users")
+            .send({
+                custName, streetAddress, zipCode, country, custEmail
+            })
+            .then((res) => {
+                console.log('Values inserted')
+            }); 
     }
 
 
