@@ -132,19 +132,39 @@ app.delete('/products/:id', (req, res) => {
 
 /*  Endpoint: /users */
 app.post('/users', (req, res) => {
-    var form = new Form ({
-        name: req.body.name,
-        street: req.body.street,
-        zipCode: req.body.zipCode,
-        country: req.body.country,
-        email: req.body.email
-    });
+    // var form = new Form ({
+    //     name: req.body.name,
+    //     street: req.body.street,
+    //     zipCode: req.body.zipCode,
+    //     country: req.body.country,
+    //     email: req.body.email
+    // });
 
-    form.save().then((doc) => {
-        res.send(doc);
-    }, (e) => {
-        res.send(e);
-    });
+    let Name = req.body.custName;
+    let Address = req.body.streetAddress;
+    let ZipCode = req.body.zipCode;
+    let Country = req.body.country;
+    let Email = req.body.custEmail;
+
+    const values = [
+        "Name",
+        "Address",
+        "ZipCode",
+        "Country",
+        "Email"
+    ];
+
+    // form.save().then((doc) => {
+    //     res.send(doc);
+    // }, (e) => {
+    //     res.send(e);
+    // });
+
+    var sqlInsert = "INSERT INTO users (Name, Street, ZipCode, Country, Email) VALUES ?";
+    connection.query(sqlInsert, [values], function(err, result) {
+        if(err) throw err;
+        console.log("Number of records inserted: " + result.affectedRows);
+    })
 });
 
 app.get('/users', (req, res) => {

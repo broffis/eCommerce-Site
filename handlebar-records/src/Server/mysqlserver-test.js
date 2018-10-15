@@ -21,14 +21,27 @@ connection.connect((err)=> {
     console.log('connected as id ' + connection.threadId);
 });
 
-connection.query('Select 1 + 1 AS solution', function(error, results, fields) {
-    if(error) throw error;
-    console.log('The solution is ', results[0].solution);
-});
+// connection.query('Select 1 + 1 AS solution', function(error, results, fields) {
+//     if(error) throw error;
+//     console.log('The solution is ', results[0].solution);
+// });
 
-connection.query('Select * from products', function(error, results, fields) {
+// connection.query('Select * from products', function(error, results, fields) {
+//     if(error) throw error;
+//     console.log(JSON.stringify(results, undefined, 2));
+// })
+
+
+var sqlInsert = "INSERT INTO users (Name, Address, ZipCode, Country, Email, Password) VALUES ?";
+// var values = ( "Name",
+//                 "Address",
+//                 "ZipCode",
+//                 "Country",
+//                 "Email",
+//                 "Password" );
+connection.query("INSERT INTO users (Name, Address, ZipCode, Country, Email, Password) VALUES ('Savannah', '456 South Street', 98765, 'US', 'anotherone@test.com', 'Testing')", function(error, results, fields) {
     if(error) throw error;
-    console.log(JSON.stringify(results, undefined, 2));
+    console.log(`Inserted values into sql`)
 })
 
 connection.end();
