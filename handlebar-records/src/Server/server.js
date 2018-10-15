@@ -45,31 +45,26 @@ app.use(bodyParser.json());
 
 /*  Endpoint: /products */
 app.post('/products', (req, res) => {
-    var product = new Product ({
-        bandName: req.body.bandName,
-        albumTitle: req.body.albumTitle,
-        cover: req.body.cover,
-        releaseYear: req.body.releaseYear,
-        recordLabel: req.body.recordLabel,
-        price: req.body.price
-    });
+    let Artist = req.body.bandName;
+    let Album = req.body.albumTitle;
+    let Cover_Art = req.body.cover;
+    let Release_Year = req.body.releaseYear;
+    let Record_Label = req.body.recordLabel;
+    let Price = req.body.price;
+    let Spotify_URI = req.body.spotifyURI;
 
-    product.save().then((doc) => {
-        res.send(doc);
-    }, (e) => {
-        res.send(e);
-    });
+    let sqlInsertProduct = "INSERT INTO products (Artist, Album, Cover_Art, Release_Year, Record_Label, Price, Spotify_URI) VALUES ";
+    sqlInsertProduct += `("${Artist}", "${Album}", "${Cover_Art}", ${Release_Year}, "${Record_Label}", ${Price}, "${Spotify_URI}")`;
+
+    connection.query(sqlInsertProduct, function(err, result) {
+        if(err) throw err;
+        console.log("Number of products inserted: " + result.affectedRows);
+    })
 });
 
 app.get('/products', (req, res) => {
-    // Product.find().then((products) => {
-    //     res.send({products})
-    // }, (e) => {
-    //     res.status(400).send(e);
-    // });
     connection.query('SELECT * FROM products', function(error, results, fields) {
         if(error) throw error;
-        // console.log(JSON.stringify(results, undefined, 2));
        res.send(results);
     })
 });
@@ -78,19 +73,17 @@ app.get('/products', (req, res) => {
 app.get('/products/:id', (req, res) => {
     var id = req.params.id;
 
-    if(!ObjectID.isValid(id)) {
-        return res.status(404).send();
+    if(isNaN(id)) {
+       return console.log('Unable to process request: IDs must be numbers');
     }
 
-    Product.findById(id).then((product) => {
-        if(!product) {
-            return res.status(404).send();
-        }
+    var queryProductbyID = 'Select * FROM products p WHERE p.ProductID =  ';
+    queryProductbyID += id;
 
-        res.send({product});
-    }).catch((e) => {
-        res.status(400).send();
-    });
+    connection.query(queryProductbyID, function(error, results, fields) {
+        if(error) throw error;
+        res.send(results);
+    })
 });
 
 app.patch('/products/:id', (req, res) => {
@@ -115,30 +108,24 @@ app.patch('/products/:id', (req, res) => {
 app.delete('/products/:id', (req, res) => {
     var id = req.params.id;
 
-    if(!ObjectID) {
-        return res.status(404).send();
+    if(isNaN(id)) {
+        return console.log('Must enter a valid ProductID: ID entered is not a number');
     }
 
-    Product.findByIdAndRemove(id).then((product) => {
-        if(!product) {
-            return res.status(404).send();
-        }
+    let sqlDeleteProductByID = "DELETE FROM products WHERE ProductID = ";
+    sqlDeleteProductByID += id;
 
-        res.send({product});
-    }).catch((e) => {
-        res.status(400).send();
-    })
+    console.log(sqlDeleteProductByID);
+
+    connection.query(sqlDeleteProductByID, function(error, results, fields) {
+        if(error) throw error;
+        console.log(`Removed Product with ID of ${id} from database`);
+        res.send();
+    });
 });
 
 /*  Endpoint: /users */
 app.post('/users', (req, res) => {
-    // var form = new Form ({
-    //     name: req.body.name,
-    //     street: req.body.street,
-    //     zipCode: req.body.zipCode,
-    //     country: req.body.country,
-    //     email: req.body.email
-    // });
 
     let Name = req.body.custName;
     let Address = req.body.streetAddress;
@@ -146,27 +133,9 @@ app.post('/users', (req, res) => {
     let Country = req.body.country;
     let Email = req.body.custEmail;
 
-    // const values = [
-    //     "Name",
-    //     "Address",
-    //     "ZipCode",
-    //     "Country",
-    //     "Email"
-    // ];
-
-    // form.save().then((doc) => {
-    //     res.send(doc);
-    // }, (e) => {
-    //     res.send(e);
-    // });
-
-    // console.log(Name, Address, ZipCode, Country, Email);
-
     var sqlInsert = "INSERT INTO users (Name, Address, ZipCode, Country, Email, Password) VALUES ";
     
     sqlInsert += `("${Name}", "${Address}", ${ZipCode}, "${Country}", "${Email}", "Password")`;
-    
-    // console.log(sqlInsert);
 
     connection.query(sqlInsert, function(err, result) {
         if(err) throw err;
@@ -175,30 +144,34 @@ app.post('/users', (req, res) => {
 });
 
 app.get('/users', (req, res) => {
-    Form.find().then((users) => {
-        res.send({users});
-    }).catch((e) => {
-        res.status(400).send(e);    
+    connection.query('SELECT * FROM users', function(error, results, fields) {
+        if(error) throw error;
+       res.send(results);
     })
+
+
+    // Form.find().then((users) => {
+    //     res.send({users});
+    // }).catch((e) => {
+    //     res.status(400).send(e);    
+    // })
 });
 
 /*  Endpoint: /users:id */
 app.get('/users/:id', (req, res) => {
     var id = req.params.id;
 
-    if(!ObjectID.isValid(id)) {
-        return res.status(404).send();
-    }
-
-    Form.findById(id).then((user) => {
-        if(!user) {
-            return res.status(404).send();
-        }
-
-        res.send({user});
-    }).catch((e) => {
-        res.status(400).send();    
-    })
+    if(isNaN(id)) {
+        return console.log('Unable to process request: IDs must be numbers');
+     }
+ 
+     var queryUserbyID = 'Select * FROM users u WHERE u.UserID =  ';
+     queryUserbyID += id;
+ 
+     connection.query(queryUserbyID, function(error, results, fields) {
+         if(error) throw error;
+         res.send(results);
+     });
 });
 
 app.patch('/users/:id', (req, res) => {
@@ -223,19 +196,20 @@ app.patch('/users/:id', (req, res) => {
 app.delete('/users/:id', (req, res) => {
     var id = req.params.id;
 
-    if(!ObjectID.isValid(id)) {
-        return res.status(404).send();
+    if(isNaN(id)) {
+        return console.log('Must enter a valid UserID: ID entered is not a number');
     }
 
-    Form.findByIdAndRemove(id).then((user) => {
-        if(!user) {
-            return res.status(404).send();
-        }
+    let sqlDeleteUserByID = "DELETE FROM users WHERE UserID = ";
+    sqlDeleteUserByID += id;
 
-        res.send({user});
-    }).catch((e) => {
-        res.status(400).send();
-    })
+    // console.log(sqlDeleteUserByID);
+
+    connection.query(sqlDeleteUserByID, function(error, results, fields) {
+        if(error) throw error;
+        console.log(`Removed User with ID of ${id} from database`);
+        res.send();
+    });
 });
 
 

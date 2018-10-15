@@ -16,7 +16,7 @@ class CenterMode extends Component {
             slidesToShow: 3,
             slidesToScroll: 1,
             speed: 500,
-            autoplay: true,
+            // autoplay: true,
             lazyLoad: true,
             pauseOnHover: true,
             // height: "300px"

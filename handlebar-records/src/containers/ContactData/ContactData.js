@@ -4,7 +4,7 @@ import request from 'superagent';
 import classes from './ContactData.css';
 import Input from '../../components/Contact/Input/Input';
 
-const apiURL = 'http://localhost:3000/users';
+// const apiURL = 'http://localhost:3000/users';
 
 class ContactData extends Component {
     state = {
