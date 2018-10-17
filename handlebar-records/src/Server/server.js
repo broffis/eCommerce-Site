@@ -89,8 +89,8 @@ app.get('/products/:id', (req, res) => {
 
 app.patch('/products/:id', (req, res) => {
     var id = req.params.id;
-    var safeColumns = ['Artist', 'Album', 'Cover_Art', 'Release_Year', 'Record_Label', 'Price', 'Spotify_URI'];     //Whitelist of columns that also allows you to loop through an array
-    var body = _.pick(req.body, safeColumns);
+    var safeProductColumns = ['Artist', 'Album', 'Cover_Art', 'Release_Year', 'Record_Label', 'Price', 'Spotify_URI'];     //Whitelist of columns that also allows you to loop through an array
+    var body = _.pick(req.body, safeProductColumns);
 
     // console.log(req.body);
 
@@ -103,16 +103,14 @@ app.patch('/products/:id', (req, res) => {
     // var sqlPatchProductbyID = "Update products SET ? where ProductID = ? ";
     var setQuery = [];
     var params = [];
-    for(var i = 0; i < safeColumns.length; i++) {
-        var colname = safeColumns[i];
+    for(var i = 0; i < safeProductColumns.length; i++) {
+        var colname = safeProductColumns[i];
         if(body[colname]) {
             setQuery.push(colname +" = ?");             //Sets values you're updating
             params.push(body[colname]);                 //Sets value updates
         }
     }
     
-    // var patchParams = (`"${JSON.stringify(body)}"`, id);
-    // var patchParams = [`"${body}"`, id];
     if (setQuery.length > 0) {
         var sqlPatchProductbyID = "UPDATE products SET " + setQuery.join(', ') + " WHERE ProductID = ?";
         params.push(id);
@@ -129,7 +127,6 @@ app.patch('/products/:id', (req, res) => {
     // sqlPatchv2 += patchParams[1];
 
 
-    
     //use lodash (_) to pull values out of request, will give field name and value. Set = to body
     //use params = [body, id]
     //SQL query "Update (table name) SET ? WHERE xID = ? "
@@ -200,21 +197,34 @@ app.get('/users/:id', (req, res) => {
 
 app.patch('/users/:id', (req, res) => {
     var id = req.params.id;
-    var body = _.pick(req.body, ["name", "street", "zipCode", "country", "email"]);
+    var safeUserColumns = ["Name", "Address", "ZipCode", "Country", "Email", "IsAdmin", "Password"]
+    var body = _.pick(req.body, safeUserColumns);
 
-    // if(!ObjectID.isValid(id)) {
-    //     return res.send(404).send();
-    // }
+    if(isNaN(id)) {
+        // res.status(400).send();
+        console.log('Unable to process request: IDs must be numbers');
+    }
 
-    // Form.findByIdAndUpdate(id, {$set: body}, {new: true}).then((user) => {
-    //     if(!user) {
-    //         return res.status(404).send();
-    //     }
+    var setUserQuery = [];
+    var paramsUser = [];
+    for(var i = 0; i < safeUserColumns.length; i++) {
+        var colname = safeUserColumns[i];
+        if(body[colname]) {
+            setUserQuery.push(colname +" =?");
+            paramsUser.push(body[colname]);
+        }
+    }
 
-    //     res.send({user});
-    // }).catch((e) => {
-    //     res.status(400).send();
-    // })
+    if (setUserQuery.length > 0) {
+        var sqlPatchUserbyID = "UPDATE users SET " + setUserQuery.join(', ') + " WHERE UserID = ?";
+        paramsUser.push(id);
+
+        connection.query(sqlPatchUserbyID, paramsUser, function(error, results, fields) {
+            if(error) throw error;
+            console.log(`Updated User with ID of ${id}`);
+            res.status(200).send(results);
+        })
+    }
 });
 
 app.delete('/users/:id', (req, res) => {
