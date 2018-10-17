@@ -177,13 +177,9 @@ class Layout extends Component {
                             <About />
                         </div>
                         <div className={classes.BandList} >
-                            {/* <img src={'finalimages/records-bkgrnd.jpg'} />
-                            <img src={this.state.subCarouselBkgrnd} /> */}
 
                             {/* <Bands bandList={this.state.bands}/> */}
-                            {/* <iframe src="https://open.spotify.com/embed/track/4Ht6bazzFyIBTdNfxwfZ4y" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe> */}
-
-                            {/* <img src={this.state.bands[0].cover} /> */}
+                         
                         </div>
                     </div>
                     <div id="BandList">

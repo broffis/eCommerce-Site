@@ -28,7 +28,7 @@ class ContactData extends Component {
             zipCode: {
                 elementType: 'input',
                 elementConfig: {
-                    type: 'text',
+                    type: 'number',
                     placeholder: 'Zip Code'
                 },
                 id: "Input_ZipCode"
@@ -54,11 +54,11 @@ class ContactData extends Component {
 
 
     formSubmitHandler = (event) => {
-        let custName = document.getElementById('name').value;
-        let streetAddress = document.getElementById('street').value;
-        let zipCode = document.getElementById('zipCode').value;
-        let country = document.getElementById('country').value;
-        let custEmail = document.getElementById('email').value;
+        let Name = document.getElementById('name').value;
+        let Address = document.getElementById('street').value;
+        let ZipCode = document.getElementById('zipCode').value;
+        let Country = document.getElementById('country').value;
+        let Email = document.getElementById('email').value;
 
         // event.preventDefault();
         // const data = new FormData(event.target);
@@ -76,7 +76,7 @@ class ContactData extends Component {
         request
             .post("http://localhost:3000/users")
             .send({
-                custName, streetAddress, zipCode, country, custEmail
+                Name, Address, ZipCode, Country, Email
             })
             .then((res) => {
                 console.log('Values inserted')

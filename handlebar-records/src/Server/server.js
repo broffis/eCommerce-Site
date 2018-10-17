@@ -4,8 +4,8 @@ const _ = require('lodash');
 const {ObjectID} = require('mongodb');
 
 // var {mongoose} = require('./db/mongoose');
-var {Form} = require('./models/form');
-var {Product} = require('./models/product');
+// var {Form} = require('./models/form');
+// var {Product} = require('./models/product');
 
 
 var mysql = require('mysql');
@@ -45,13 +45,13 @@ app.use(bodyParser.json());
 
 /*  Endpoint: /products */
 app.post('/products', (req, res) => {
-    let Artist = req.body.bandName;
-    let Album = req.body.albumTitle;
-    let Cover_Art = req.body.cover;
-    let Release_Year = req.body.releaseYear;
-    let Record_Label = req.body.recordLabel;
-    let Price = req.body.price;
-    let Spotify_URI = req.body.spotifyURI;
+    let Artist = req.body.Artist;
+    let Album = req.body.Album;
+    let Cover_Art = req.body.Cover_Art;
+    let Release_Year = req.body.Release_Year;
+    let Record_Label = req.body.Record_Label;
+    let Price = req.body.Price;
+    let Spotify_URI = req.body.Spotify_URI;
 
     let sqlInsertProduct = "INSERT INTO products (Artist, Album, Cover_Art, Release_Year, Record_Label, Price, Spotify_URI) VALUES ";
     sqlInsertProduct += `("${Artist}", "${Album}", "${Cover_Art}", ${Release_Year}, "${Record_Label}", ${Price}, "${Spotify_URI}")`;
@@ -59,6 +59,7 @@ app.post('/products', (req, res) => {
     connection.query(sqlInsertProduct, function(err, result) {
         if(err) throw err;
         console.log("Number of products inserted: " + result.affectedRows);
+        res.send(result);
     })
 });
 
@@ -88,21 +89,51 @@ app.get('/products/:id', (req, res) => {
 
 app.patch('/products/:id', (req, res) => {
     var id = req.params.id;
-    var body = _.pick(req.body, ['albumTitle', 'artist', 'releaseYear']);
+    var safeColumns = ['Artist', 'Album', 'Cover_Art', 'Release_Year', 'Record_Label', 'Price', 'Spotify_URI'];     //Whitelist of columns that also allows you to loop through an array
+    var body = _.pick(req.body, safeColumns);
 
-    if(!ObjectID.isValid(id)) {
-        return res.status(404).send();
+    // console.log(req.body);
+
+    // console.log(id, body);
+
+    if(isNaN(id)) {
+        return console.log('Unable to process request: IDs must be numbers');
     }
 
-    Product.findByIdAndUpdate(id, {$set: body}, {new: true}).then((product) => {            //What is {new: true}?
-        if(!product) {
-            return res.status(404).send();
+    // var sqlPatchProductbyID = "Update products SET ? where ProductID = ? ";
+    var setQuery = [];
+    var params = [];
+    for(var i = 0; i < safeColumns.length; i++) {
+        var colname = safeColumns[i];
+        if(body[colname]) {
+            setQuery.push(colname +" = ?");             //Sets values you're updating
+            params.push(body[colname]);                 //Sets value updates
         }
-        
-        res.send({product});
-    }).catch((e) => {
-        res.status(400).send();    
-    })
+    }
+    
+    // var patchParams = (`"${JSON.stringify(body)}"`, id);
+    // var patchParams = [`"${body}"`, id];
+    if (setQuery.length > 0) {
+        var sqlPatchProductbyID = "UPDATE products SET " + setQuery.join(', ') + " WHERE ProductID = ?";
+        params.push(id);
+
+        connection.query(sqlPatchProductbyID, params, function(error, results, fields) {
+            if(error) throw error;
+            console.log(`Updated Product with ID of ${id}`);
+            res.status(200).send(results);
+        })
+    }
+    // var sqlPatchv2 = "Update products SET ";
+    // sqlPatchv2 += patchParams[0];
+    // sqlPatchv2 += " WHERE ProductID = ";
+    // sqlPatchv2 += patchParams[1];
+
+
+    
+    //use lodash (_) to pull values out of request, will give field name and value. Set = to body
+    //use params = [body, id]
+    //SQL query "Update (table name) SET ? WHERE xID = ? "
+            //connection.query(query, [params], function())
 });
 
 app.delete('/products/:id', (req, res) => {
@@ -127,11 +158,11 @@ app.delete('/products/:id', (req, res) => {
 /*  Endpoint: /users */
 app.post('/users', (req, res) => {
 
-    let Name = req.body.custName;
-    let Address = req.body.streetAddress;
-    let ZipCode = req.body.zipCode;
-    let Country = req.body.country;
-    let Email = req.body.custEmail;
+    let Name = req.body.Name;
+    let Address = req.body.Address;
+    let ZipCode = req.body.ZipCode;
+    let Country = req.body.Country;
+    let Email = req.body.Email;
 
     var sqlInsert = "INSERT INTO users (Name, Address, ZipCode, Country, Email, Password) VALUES ";
     
@@ -148,13 +179,6 @@ app.get('/users', (req, res) => {
         if(error) throw error;
        res.send(results);
     })
-
-
-    // Form.find().then((users) => {
-    //     res.send({users});
-    // }).catch((e) => {
-    //     res.status(400).send(e);    
-    // })
 });
 
 /*  Endpoint: /users:id */
@@ -178,19 +202,19 @@ app.patch('/users/:id', (req, res) => {
     var id = req.params.id;
     var body = _.pick(req.body, ["name", "street", "zipCode", "country", "email"]);
 
-    if(!ObjectID.isValid(id)) {
-        return res.send(404).send();
-    }
+    // if(!ObjectID.isValid(id)) {
+    //     return res.send(404).send();
+    // }
 
-    Form.findByIdAndUpdate(id, {$set: body}, {new: true}).then((user) => {
-        if(!user) {
-            return res.status(404).send();
-        }
+    // Form.findByIdAndUpdate(id, {$set: body}, {new: true}).then((user) => {
+    //     if(!user) {
+    //         return res.status(404).send();
+    //     }
 
-        res.send({user});
-    }).catch((e) => {
-        res.status(400).send();
-    })
+    //     res.send({user});
+    // }).catch((e) => {
+    //     res.status(400).send();
+    // })
 });
 
 app.delete('/users/:id', (req, res) => {
