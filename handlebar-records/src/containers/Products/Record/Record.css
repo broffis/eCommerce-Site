@@ -6,13 +6,14 @@
     display: flex;
     flex-direction: column;
     position: relative;
+    text-align: center;
 
 }
 
 .Record figcaption {
     font-family: 'Montserrat', sans-serif;
     background-color: white;
-    opacity: 0.8;
+    /* opacity: 0.8; */
     /* display: none; */
     z-index: 1;
 }
@@ -25,11 +26,25 @@
 .Record img {
     /* width: 100px; */
     width: 100%;
-    z-index: -1;
+    /* z-index: -1; */
+    height: 100%;
+    position: relative;
 }
 
 .Player {
     width: 100%;
     height: 100%;
-    z-index: -1;
+    /* z-index: -1; */
+    opacity: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    /* opacity: 0; */
+}
+
+
+.Player:hover {
+    /* z-index: 1; */
+    opacity: 1;
 }
