@@ -1,7 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const _ = require('lodash');
-const {ObjectID} = require('mongodb');
+// const {ObjectID} = require('mongodb');
 
 // var {mongoose} = require('./db/mongoose');
 // var {Form} = require('./models/form');
@@ -9,6 +9,7 @@ const {ObjectID} = require('mongodb');
 
 
 var mysql = require('mysql');
+
 var connection = mysql.createConnection({
     host: 'localhost',
     port: 8889,
@@ -168,6 +169,7 @@ app.post('/users', (req, res) => {
     connection.query(sqlInsert, function(err, result) {
         if(err) throw err;
         console.log("Number of records inserted: " + result.affectedRows);
+        res.send();
     })
 });
 
