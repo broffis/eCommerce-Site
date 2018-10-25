@@ -8,7 +8,7 @@ const carouselItem = (props) => {
     <figure className={classes.CarouselItem}>
        <img src={props.cover} alt={altText} /*by ${props.band}'*//>
         <figcaption>{props.band}</figcaption>
-        <div className={classes.textOverlay}>
+        <div className={classes.textOverlay} tabIndex="-1">
             <p>{props.albumName} </p>
             <p> by </p> 
             <p>{props.band}</p>

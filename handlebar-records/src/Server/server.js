@@ -206,7 +206,7 @@ app.get('/users/:id', (req, res) => {
 app.patch('/users/:id', (req, res) => {
     var id = req.params.id;
     var safeUserColumns = ["Name", "Address", "ZipCode", "Country", "Email", "IsAdmin", "Password"];
-    var body = _.pick(req.body, safeUserColumns);
+    var body = _.pick(req.body, safeUserColumns)
 
     if(isNaN(id)) {
         return res.status(400).send();
