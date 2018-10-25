@@ -88,3 +88,24 @@ img {
     }
   }
 
+  @media screen and (min-width: 1800px) {
+    .Products {
+        padding-top: 27%;
+    }
+    .Products h3 {
+        font-size: 4.25em;
+    }
+    .Products ul {
+        padding: 0 0 0 5%;
+    }
+
+    .Products li {
+        width: 27.333%;
+        border: 2px solid #ccc;
+    }
+    .SearchInput input {
+        font-size: 2.75em;
+        height: auto;
+        width: auto;
+    }
+  }

@@ -5,7 +5,7 @@ import classes from './Products.css';
 import Record from './Record/Record';
 
 
-const KEYS_TO_FILTERS = ['albumName', 'price', 'bandName'];
+const KEYS_TO_FILTERS = ['Album', 'Price', 'Artist'];
 
 class Products extends Component {
     constructor (props) {

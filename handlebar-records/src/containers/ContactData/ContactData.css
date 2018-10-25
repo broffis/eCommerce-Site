@@ -2,7 +2,7 @@
     margin: 100px auto;
     width: 80%;
     text-align: center;
-    box-shadow: 0 2px 3px #ccc;
+    box-shadow: 0 2px 3px #555;
     border: 1px solid #eee;
     padding: 10px;
     box-sizing: border-box;
@@ -13,7 +13,7 @@
     font-size: .75em;
     border: 1px solid black;
     border-radius: 5px;
-    box-shadow: 0 1px 1.5px #ccc;
+    box-shadow: 0 1px 1.5px #555;
     background-color: white;
     /* text-align: right; */
 }
@@ -36,24 +36,39 @@
 }
 
 @media screen and (min-width: 720px) {
-    .BodyText h3 {
+    h4 {
         font-size: 1.65em;
     }
-    .BodyText p {
+    .ContactData p {
        font-size: 1.15em;
+    }
+    .ContactData {
+        width: 750px;
     }
 }
 
 
 
 @media screen and (min-width: 960px) {
-    .BodyText h3 {
+    h4 {
         font-size: 1.65em;
     }
-    .BodyText p {
+    .ContactData p {
        font-size: 1.15em;
     }
     .ContactData button {
         font-size: 1em;
+    }
+  }
+
+  @media screen and (min-width: 1800px) {
+    h4 {
+        font-size: 4.25em;
+    }
+    .ContactData p {
+       font-size: 2.75em;
+    }
+    .ContactData button {
+        font-size: 2.75em;
     }
   }

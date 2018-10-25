@@ -36,7 +36,14 @@
   
   @media screen and (min-width: 960px) {
     .Logo img {
-      height: 200px;
+      height: 150px;
+      width: auto;
+    }
+  }
+
+  @media screen and (min-width: 1800px) {
+    .Logo img {
+      height: 300px;
       width: auto;
     }
   }

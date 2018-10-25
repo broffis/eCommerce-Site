@@ -3,35 +3,20 @@
 
 .Carousel {
     margin-top: 18%;
-    /* height: 300px; */
     display: block;
-    /* width: 30%; */
-    /* display: flex; */
-    /* box-shadow: 0 2px 3px #ccc; */
 }
 
 .Carousel div {
-    /* width: 100%;  */
     box-sizing: border-box;
     padding-top: 10px;
-    /* padding: 10% 5% 0 5%; */
     display: block;
-    /* align-content: center;
-    align-items: center;
-    justify-content: center;
-    justify-items: center; */
-    /* flex-direction: row; */
 }
 
 .Carousel figure {
-    /* margin: auto; */
     padding: 1%;
-    /* margin: 0; */
     margin-left: 0;
     margin-right: 0;
     box-shadow: 0 2px 3px #ccc;
-    /* align-self: center; */
-    /* justify-self: center; */
 }
 
 @media screen and (min-width: 480px) {

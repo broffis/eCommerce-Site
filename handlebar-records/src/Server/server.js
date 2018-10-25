@@ -57,17 +57,21 @@ app.post('/products', (req, res) => {
     let sqlInsertProduct = "INSERT INTO products (Artist, Album, Cover_Art, Release_Year, Record_Label, Price, Spotify_URI) VALUES ";
     sqlInsertProduct += `("${Artist}", "${Album}", "${Cover_Art}", ${Release_Year}, "${Record_Label}", ${Price}, "${Spotify_URI}")`;
 
-    connection.query(sqlInsertProduct, function(err, result) {
-        if(err) throw err;
+    connection.query(sqlInsertProduct, function(err, result, fields) {
+        if(err) {
+            return res.status(400).send();
+        };
         console.log("Number of products inserted: " + result.affectedRows);
-        res.send(result);
+        res.status(200).send(result);
     })
 });
 
 app.get('/products', (req, res) => {
-    connection.query('SELECT * FROM products', function(error, results, fields) {
-        if(error) throw error;
-       res.send(results);
+    connection.query('SELECT * FROM products', function(err, results, fields) {
+        if(err) {
+            return res.status(400).send();
+        }
+       res.status(200).send(results);
     })
 });
 
@@ -76,15 +80,17 @@ app.get('/products/:id', (req, res) => {
     var id = req.params.id;
 
     if(isNaN(id)) {
-       return console.log('Unable to process request: IDs must be numbers');
+       return res.status(400).send();
     }
 
     var queryProductbyID = 'Select * FROM products p WHERE p.ProductID =  ';
     queryProductbyID += id;
 
     connection.query(queryProductbyID, function(error, results, fields) {
-        if(error) throw error;
-        res.send(results);
+        if(error) {
+            return res.status(400).send();
+        }
+        res.status(200).send(results);
     })
 });
 
@@ -93,15 +99,10 @@ app.patch('/products/:id', (req, res) => {
     var safeProductColumns = ['Artist', 'Album', 'Cover_Art', 'Release_Year', 'Record_Label', 'Price', 'Spotify_URI'];     //Whitelist of columns that also allows you to loop through an array
     var body = _.pick(req.body, safeProductColumns);
 
-    // console.log(req.body);
-
-    // console.log(id, body);
-
     if(isNaN(id)) {
-        return console.log('Unable to process request: IDs must be numbers');
+        return res.status(400).send();
     }
 
-    // var sqlPatchProductbyID = "Update products SET ? where ProductID = ? ";
     var setQuery = [];
     var params = [];
     for(var i = 0; i < safeProductColumns.length; i++) {
@@ -117,8 +118,9 @@ app.patch('/products/:id', (req, res) => {
         params.push(id);
 
         connection.query(sqlPatchProductbyID, params, function(error, results, fields) {
-            if(error) throw error;
-            console.log(`Updated Product with ID of ${id}`);
+            if(error) {
+                return res.status(400).send();
+            }
             res.status(200).send(results);
         })
     }
@@ -138,18 +140,17 @@ app.delete('/products/:id', (req, res) => {
     var id = req.params.id;
 
     if(isNaN(id)) {
-        return console.log('Must enter a valid ProductID: ID entered is not a number');
+        return res.status(400).send();
     }
 
     let sqlDeleteProductByID = "DELETE FROM products WHERE ProductID = ";
     sqlDeleteProductByID += id;
 
-    console.log(sqlDeleteProductByID);
-
     connection.query(sqlDeleteProductByID, function(error, results, fields) {
-        if(error) throw error;
-        console.log(`Removed Product with ID of ${id} from database`);
-        res.send();
+        if(error) {
+            return res.status(400).send();
+        }
+        res.status(200).send();
     });
 });
 
@@ -167,16 +168,19 @@ app.post('/users', (req, res) => {
     sqlInsert += `("${Name}", "${Address}", ${ZipCode}, "${Country}", "${Email}", "Password")`;
 
     connection.query(sqlInsert, function(err, result) {
-        if(err) throw err;
-        console.log("Number of records inserted: " + result.affectedRows);
-        res.send();
+        if(err) {
+            return res.status(400).send();
+        }
+        res.status(200).send();
     })
 });
 
 app.get('/users', (req, res) => {
     connection.query('SELECT * FROM users', function(error, results, fields) {
-        if(error) throw error;
-       res.send(results);
+        if(error) {
+            return res.status(400).send();
+        }
+       res.status(200).send(results);
     })
 });
 
@@ -185,26 +189,27 @@ app.get('/users/:id', (req, res) => {
     var id = req.params.id;
 
     if(isNaN(id)) {
-        return console.log('Unable to process request: IDs must be numbers');
+        return res.status(400).send();
      }
  
      var queryUserbyID = 'Select * FROM users u WHERE u.UserID =  ';
      queryUserbyID += id;
  
      connection.query(queryUserbyID, function(error, results, fields) {
-         if(error) throw error;
-         res.send(results);
+         if(error) {
+             return res.status(400).send();
+         }
+         res.status(200).send(results);
      });
 });
 
 app.patch('/users/:id', (req, res) => {
     var id = req.params.id;
-    var safeUserColumns = ["Name", "Address", "ZipCode", "Country", "Email", "IsAdmin", "Password"]
+    var safeUserColumns = ["Name", "Address", "ZipCode", "Country", "Email", "IsAdmin", "Password"];
     var body = _.pick(req.body, safeUserColumns);
 
     if(isNaN(id)) {
-        // res.status(400).send();
-        console.log('Unable to process request: IDs must be numbers');
+        return res.status(400).send();
     }
 
     var setUserQuery = [];
@@ -222,8 +227,9 @@ app.patch('/users/:id', (req, res) => {
         paramsUser.push(id);
 
         connection.query(sqlPatchUserbyID, paramsUser, function(error, results, fields) {
-            if(error) throw error;
-            console.log(`Updated User with ID of ${id}`);
+            if(error) {
+                return res.status(400).send();
+            }
             res.status(200).send(results);
         })
     }
@@ -233,18 +239,17 @@ app.delete('/users/:id', (req, res) => {
     var id = req.params.id;
 
     if(isNaN(id)) {
-        return console.log('Must enter a valid UserID: ID entered is not a number');
+        return res.status(400).send();
     }
 
     let sqlDeleteUserByID = "DELETE FROM users WHERE UserID = ";
     sqlDeleteUserByID += id;
 
-    // console.log(sqlDeleteUserByID);
-
     connection.query(sqlDeleteUserByID, function(error, results, fields) {
-        if(error) throw error;
-        console.log(`Removed User with ID of ${id} from database`);
-        res.send();
+        if(error) {
+            return res.status(400).send();
+        }
+        res.status(200).send();
     });
 });
 

@@ -60,26 +60,14 @@ class ContactData extends Component {
         let Country = document.getElementById('country').value;
         let Email = document.getElementById('email').value;
 
-        // event.preventDefault();
-        // const data = new FormData(event.target);
-
-        // fetch(apiURL, {
-        //     method: 'POST',
-        //     body: data
-        // });
-        // console.log(body);
-
-        // console.log();
-
-        // console.log(custName, streetAddress, zipCode, country, custEmail);
-
         request
             .post("http://localhost:3000/users")
             .send({
                 Name, Address, ZipCode, Country, Email
             })
             .then((res) => {
-                console.log('Values inserted')
+                console.log('Values inserted');
+                alert('Form submitted to database');
             }); 
     }
 

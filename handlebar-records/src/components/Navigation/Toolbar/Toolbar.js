@@ -11,6 +11,7 @@ const toolbar = (props) => (
             <Logo />
         </div>
         <nav>
+            <a className={classes.SkipLink} href="#About"><p>Skip to Main Content</p></a>
             <NavList/>
         </nav>
     </header>
