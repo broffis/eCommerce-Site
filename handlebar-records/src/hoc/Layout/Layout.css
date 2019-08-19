@@ -23,7 +23,7 @@
     box-shadow: 0 2px 3px #aaa;
     background-color: white;
     opacity: 0.75;
-    /* height: 50%; */
+    height: 50%;
 }
 
 .BandList {
@@ -70,6 +70,6 @@ main {
 
 
 :focus {
-    box-shadow: 0 2px 3px hotpink;
+    /* box-shadow: 0 2px 3px hotpink; */
 }
 

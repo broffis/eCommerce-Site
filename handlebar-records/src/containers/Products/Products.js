@@ -59,22 +59,8 @@ class Products extends Component {
             <div className={classes.Products}>
                 <h3>Records</h3>
                 <h4>Search:</h4>
-                {/* <div className={classes.DropDown}> */}
-                    {/* <select name="bands" onChange={this.bandSelectHandler}>
-                        <option value="All">All</option>
-                        <option value="Action Bronson">Action Bronson</option>
-                        <option value="Bring Me the Horizon">Bring Me the Horizon</option>
-                        <option value="Bruce Springsteen">Bruce Springsteen</option>                                                
-                        <option value="Panic at the Disco">Panic at the Disco</option>
-                        <option value="Linkin Park">Linkin Park</option>
-                        <option value="Mac Miller">Mac Miller</option>
-                        <option value="My Chemical Romance">My Chemical Romance</option>
-                        <option value="Twenty One Pilots">Twenty One Pilots</option>
-                        <option value="Various Artists">Various Artists</option>
-                        <option value="We Were Promised Jetpacks">We Were Promised Jetpacks</option>
-                    </select> */}
+
                     <SearchInput className={classes.SearchInput} onChange={this.searchUpdated} placeholder='Price/Artist/Album'/>
-                {/* </div> */}
                 <ul>
                     {filteredRecords.map(record=> (
                         <Record 
