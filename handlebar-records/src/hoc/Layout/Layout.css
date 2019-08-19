@@ -6,9 +6,11 @@
     align-content: center;
     margin-top: 18%;
     /* background-color: hotpink; */
-    /* background-image: 'finalimages/records-bkgrnd.jpg'; */
-    /* background-repeat: no-repeat; */
-    /* background-size: cover; */
+    background-image: url('../../assets/images/records-bkgrnd.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 95vh;
+    
 }
 
 .About {
@@ -18,9 +20,10 @@
     box-sizing: border-box;
     font-family: 'Montserrat', sans-serif;
     border: 2px solid #ccc;
-    box-shadow: 0 2px 3px #ccc;
+    box-shadow: 0 2px 3px #aaa;
     background-color: white;
     opacity: 0.75;
+    height: 50%;
 }
 
 .BandList {
@@ -54,9 +57,19 @@
     box-sizing: border-box;
     width: 20%;
     font-family: 'Crimson Text', serif;
+    /* height: 50px; */
 }
 
 img {
     width: auto;
+}
+
+main {
+    overflow-x: hidden;
+}
+
+
+:focus {
+    /* box-shadow: 0 2px 3px hotpink; */
 }
 

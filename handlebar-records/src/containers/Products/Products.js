@@ -5,7 +5,7 @@ import classes from './Products.css';
 import Record from './Record/Record';
 
 
-const KEYS_TO_FILTERS = ['albumName', 'price', 'bandName'];
+const KEYS_TO_FILTERS = ['Album', 'Price', 'Artist'];
 
 class Products extends Component {
     constructor (props) {
@@ -43,55 +43,33 @@ class Products extends Component {
     }
     
     render() {
-        // let filteredRecords = this.props.record;
+        let filteredRecords = this.props.record;
         // console.log(this.props);
-        let bandStateFilter = this.state.bandSearch;
+        // let bandStateFilter = this.state.bandSearch;
         const recordList = this.props.records;
-        // if (bandStateFilter = 'All') {
-        //     filteredRecords = recordList.filter(createFilter(this.state.searchTerm, KEYS_TO_FILTERS))
-        // } else {
-        //     filteredRecords = recordList.filter(item => item.artist === this.state.bandSearch)
-        // }
+        if (this.state.bandSearch === 'All') {
+            filteredRecords = recordList.filter(createFilter(this.state.searchTerm, KEYS_TO_FILTERS))
+        } else {
+            filteredRecords = recordList.filter(item => item.artist === this.state.bandSearch)
+        }
         
-        const filteredRecords = this.state.bandSearch === 'All' ? this.props.records : this.props.records.filter(item => item.artist === this.state.bandSearch);
+        // const filteredRecords = this.state.bandSearch === 'All' ? this.props.records : this.props.records.filter(item => item.artist === this.state.bandSearch);
 
         return (
             <div className={classes.Products}>
                 <h3>Records</h3>
                 <h4>Search:</h4>
-                <div className={classes.DropDown}>
-                    <select name="bands" onChange={this.bandSelectHandler}>
-                        <option value="All">All</option>
-                        <option value="Action Bronson">Action Bronson</option>
-                        <option value="Bring Me the Horizon">Bring Me the Horizon</option>
-                        <option value="Bruce Springsteen">Bruce Springsteen</option>                                                
-                        <option value="Panic at the Disco">Panic at the Disco</option>
-                        <option value="Linkin Park">Linkin Park</option>
-                        <option value="Mac Miller">Mac Miller</option>
-                        <option value="My Chemical Romance">My Chemical Romance</option>
-                        <option value="Twenty One Pilots">Twenty One Pilots</option>
-                        <option value="Various Artists">Various Artists</option>
-                        <option value="We Were Promised Jetpacks">We Were Promised Jetpacks</option>
-                    </select>
+
                     <SearchInput className={classes.SearchInput} onChange={this.searchUpdated} placeholder='Price/Artist/Album'/>
-                </div>
-                {/* <div className={classes.SearchInput}>
-                    <label for="band">Band</label>
-                        <input type="checkbox" name="bandSearch" value="band" id="band"/>
-                    <label for="price">Price</label>
-                        <input type="checkbox" name="priceSearch" value="price" id="price"/>
-                    <label for="album">Album</label>
-                        <input type="checkbox" name="albumSearch" value="album" id="album"/> */}
-                    
-                {/* </div> */}
                 <ul>
                     {filteredRecords.map(record=> (
                         <Record 
-                            key={record.albumName}
-                            albumName={record.albumName}
-                            albumCover={record.cover}
-                            price={record.price}
-                            artist={record.bandName}
+                            key={record.ProductID}
+                            albumName={record.Album}
+                            albumCover={record.Cover_Art}
+                            price={record.Price}
+                            artist={record.Artist}
+                            spotifyURI={record.Spotify_URI}
                         />
                     ))}
                 </ul>

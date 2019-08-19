@@ -1,6 +1,6 @@
 import React from 'react';
 
-// import NavList from '../NavList/NavList';
+import NavList from '../NavList/NavList';
 // import Logo from '../../Logo/Logo';
 import Logo from '../../Logo/Logo';
 import classes from './Toolbar.css'
@@ -11,7 +11,8 @@ const toolbar = (props) => (
             <Logo />
         </div>
         <nav>
-            {/* <NavList/> */}
+            <a className={classes.SkipLink} href="#About"><p>Skip to Main Content</p></a>
+            <NavList/>
         </nav>
     </header>
 )

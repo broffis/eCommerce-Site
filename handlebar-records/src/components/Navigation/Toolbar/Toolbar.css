@@ -19,8 +19,17 @@
     /* height: 80%; */
     box-sizing: border-box;
     /* justify-content: center; */
-    padding: 5px;
+    padding: 5px 5px 0 5px;
     width: 100%;
+}
+
+.SkipLink {
+    position: absolute;
+    left: 100%;
+}
+
+.SkipLink:focus {
+    left: 50%;
 }
 
 @media screen and (min-width: 480px) {
@@ -38,5 +47,11 @@
 @media screen and (min-width: 960px) {
     .Toolbar {
         height: 120px;
+    }
+}
+
+@media screen and (min-width: 1800px) {
+    .Toolbar {
+        height: 300px;
     }
 }

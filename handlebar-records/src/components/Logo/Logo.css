@@ -2,7 +2,7 @@
   background-color: #EB712F;
   /* height: 30px; */
   width: 100%;
-  padding: 5px;
+  padding-top: 5px;
 }
 
 .Header_ln1 {
@@ -18,9 +18,17 @@
     height: 50px;
   }
 
-  @media screen and (min-width: 720px) {
+
+  @media screen and (min-width: 480px) {
     .Logo img {
       height: 75px;
+      width: auto;
+    }
+}
+
+  @media screen and (min-width: 720px) {
+    .Logo img {
+      height: 125px;
       width: auto;
     }
   }
@@ -28,7 +36,14 @@
   
   @media screen and (min-width: 960px) {
     .Logo img {
-      height: 100px;
+      height: 150px;
+      width: auto;
+    }
+  }
+
+  @media screen and (min-width: 1800px) {
+    .Logo img {
+      height: 300px;
       width: auto;
     }
   }

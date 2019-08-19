@@ -1,12 +1,47 @@
 .About {
     font-family: 'Montserrat', sans-serif;
     border: 1px solid #ccc;
-    background-color: hotpink;
 }
 
 .BodyText p {
-    font-size: 0.75em;
+    font-size: 1em;
     text-align: justify;
     line-height: 1em;
     font-family: 'Crimson Text', serif;
+}
+
+
+
+
+@media screen and (min-width: 480px) {
+
+}
+
+@media screen and (min-width: 720px) {
+    .BodyText h3 {
+        font-size: 1.65em;
+    }
+    .BodyText p {
+       font-size: 1.15em;
+    }
+}
+
+
+
+@media screen and (min-width: 960px) {
+    h3 {
+        font-size: 1.65em;
+    }
+    .BodyText p {
+       font-size: 1.15em;
+    }
+  }
+
+@media screen and (min-width: 1800px) {
+    h3 {
+        font-size: 4.25em;
+    }
+    .BodyText p {
+        font-size: 2.75em;
+    }
 }

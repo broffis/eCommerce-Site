@@ -16,8 +16,8 @@ class CenterMode extends Component {
             slidesToShow: 3,
             slidesToScroll: 1,
             speed: 500,
-            // autoplay: true,
-            // lazyLoad: true,
+            autoplay: true,
+            lazyLoad: true,
             pauseOnHover: true,
             // height: "300px"
         };
@@ -27,10 +27,10 @@ class CenterMode extends Component {
                 <Slider {...settings}>
                     {albumList.map(album => (
                         <CarouselItem
-                            key={album.id}
-                            cover={album.cover}
-                            band={album.bandName}
-                            albumName={album.albumName}
+                            key={album.ProductID}
+                            cover={album.Cover_Art}
+                            band={album.Artist}
+                            albumName={album.Album}
                             />
                     ))}
                 </Slider>

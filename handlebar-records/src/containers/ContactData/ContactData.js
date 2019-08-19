@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
+import request from 'superagent';
 
 import classes from './ContactData.css';
 import Input from '../../components/Contact/Input/Input';
+
+// const apiURL = 'http://localhost:3000/users';
 
 class ContactData extends Component {
     state = {
@@ -12,7 +15,7 @@ class ContactData extends Component {
                     type: 'text',
                     placeholder: 'Your Name'
                 },
-                value: ''
+                id: "Input_Name"
             },
             street: {
                 elementType: 'input',
@@ -20,15 +23,15 @@ class ContactData extends Component {
                     type: 'text',
                     placeholder: 'Street Address',
                 },
-                value: ''
+                id: "Input_Street"
             },
             zipCode: {
                 elementType: 'input',
                 elementConfig: {
-                    type: 'text',
+                    type: 'number',
                     placeholder: 'Zip Code'
                 },
-                value: ''
+                id: "Input_ZipCode"
             },
             country: {
                 elementType: 'input',
@@ -36,7 +39,7 @@ class ContactData extends Component {
                     type: 'text',
                     placeholder: 'Country'
                 },
-                value: ''
+                id: "Input_Country"
             },
             email: {
                 elementType: 'input',
@@ -44,21 +47,31 @@ class ContactData extends Component {
                     type: 'email',
                     placeholder: 'Email Address'
                 },
-                value: ''
+                id: "Input_Email"
             },
-            deliveryMethod: {
-                elementType: 'select',
-                elementConfig: {
-                    options: [
-                        {value: 'express', displayValue: 'Express'},
-                        {value: 'standard', displayValue: 'Standard'}
-                    ]
-                },
-                value: ''
-            },
-            // loading: false
         }
     }
+
+
+    formSubmitHandler = (event) => {
+        let Name = document.getElementById('name').value;
+        let Address = document.getElementById('street').value;
+        let ZipCode = document.getElementById('zipCode').value;
+        let Country = document.getElementById('country').value;
+        let Email = document.getElementById('email').value;
+
+        request
+            .post("http://localhost:3000/users")
+            .send({
+                Name, Address, ZipCode, Country, Email
+            })
+            .then((res) => {
+                console.log('Values inserted');
+                alert('Form submitted to database');
+            }); 
+    }
+
+
     render() {
         const formElementsArray = [];
         for (let key in this.state.ContactForm) {
@@ -68,15 +81,17 @@ class ContactData extends Component {
             });
         } 
         let form = (
-            <form>
+            <form onSubmit={this.formSubmitHandler}>
                 {formElementsArray.map(formElement => (
                     <Input
                         key={formElement.id}
                         elementType={formElement.config.elementType}
                         elementConfig={formElement.config.elementConfig}
                         value={formElement.config.value}
+                        id={formElement.id}
                     />
                 ))}
+                <button type="button" onClick={this.formSubmitHandler}>Submit</button>
             </form>
         );
         return (

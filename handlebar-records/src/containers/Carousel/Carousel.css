@@ -3,29 +3,17 @@
 
 .Carousel {
     margin-top: 18%;
-    /* height: 300px; */
     display: block;
-    /* width: 30%; */
-    /* display: flex; */
-    /* box-shadow: 0 2px 3px #ccc; */
 }
 
 .Carousel div {
-    /* background-color: green; */
-    /* height: auto; */
-    /* height: 500px; */
-    /* width: 33%; */
-    width: auto;
     box-sizing: border-box;
-    /* border: 2px solid black; */
-    margin-top: 10px;
+    padding-top: 10px;
     display: block;
 }
 
 .Carousel figure {
-    /* margin: auto; */
     padding: 1%;
-    /* margin: 0; */
     margin-left: 0;
     margin-right: 0;
     box-shadow: 0 2px 3px #ccc;
@@ -33,13 +21,13 @@
 
 @media screen and (min-width: 480px) {
     .Carousel{
-        margin-top: 10%;
+        padding-top: 20px;
     }
 }
 
 @media screen and (min-width: 720px) {
     .Carousel{
-        margin-top: 9%;
+        padding-top: 25px;
     }
 }
 
